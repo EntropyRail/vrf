@@ -1,0 +1,9 @@
+# Public, non-secret configuration for one independently operated threshold node.
+# VRF_RPC_URLS is a root-only systemd credential because provider URLs commonly contain tokens.
+VRF_COORDINATOR=0x0000000000000000000000000000000000000000
+VRF_THRESHOLD_MANIFEST=/etc/proof-vrf/threshold-group.json
+VRF_THRESHOLD_KEYSTORE=/var/lib/proof-vrf/threshold-share.json
+VRF_THRESHOLD_STATE=/var/lib/proof-vrf/threshold-signing-state.json
+VRF_THRESHOLD_AUDIT_LOG=/var/lib/proof-vrf/threshold-signing-audit.jsonl
+VRF_THRESHOLD_HOST=0.0.0.0
+VRF_THRESHOLD_PORT=9443

@@ -1,0 +1,17 @@
+[extend]
+useDefault = true
+
+# Exact public values only; private keys, credentials, and entire files are not allowed.
+[[allowlists]]
+description = "Public onchain VRF key identifier, not a signing secret"
+condition = "AND"
+paths = ['''^docs/deployments/robinhood-testnet-v3\.json$''']
+regexTarget = "secret"
+regexes = ['''^0x1fbf5fb54b3dfa52ca12a50f8da5f7fcb546d8ce367d4fc21f3a3c85e81df744$''']
+
+[[allowlists]]
+description = "Public SHA-256 digest of operator/secrets.mjs source, not credential material"
+condition = "AND"
+paths = ['''^source-provenance\.json$''']
+regexTarget = "secret"
+regexes = ['''^f6469652214ac2b1e3da0177fbf1f40141b9101ceeb3b0abcdc2dd773340aeed$''']

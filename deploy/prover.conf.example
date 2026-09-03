@@ -1,0 +1,6 @@
+# Public, non-secret configuration for the isolated ECVRF prover.
+# VRF_RPC_URLS is a root-only systemd credential because provider URLs commonly contain tokens.
+VRF_COORDINATOR=0x0000000000000000000000000000000000000000
+VRF_CHAIN_ID=46630
+VRF_PROVER_HOST=10.200.0.12
+VRF_PROVER_PORT=9444

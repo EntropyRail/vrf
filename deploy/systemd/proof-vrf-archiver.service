@@ -1,0 +1,33 @@
+[Unit]
+Description=Robinhood testnet independent budget-capped blockhash archiver
+After=network-online.target wg-quick@wg0.service
+Wants=network-online.target
+Requires=wg-quick@wg0.service
+
+[Service]
+Type=simple
+User=proof-vrf
+Group=proof-vrf
+WorkingDirectory=/opt/proof-vrf/current
+LoadCredential=tx-private-key:/etc/proof-vrf/credentials/tx-private-key
+LoadCredential=database-url:/etc/proof-vrf/credentials/database-url
+LoadCredential=rpc-urls:/etc/proof-vrf/credentials/rpc-urls
+ExecStart=/usr/bin/env VRF_TX_PRIVATE_KEY_FILE=${CREDENTIALS_DIRECTORY}/tx-private-key VRF_DATABASE_URL_FILE=${CREDENTIALS_DIRECTORY}/database-url VRF_RPC_URLS_FILE=${CREDENTIALS_DIRECTORY}/rpc-urls /usr/bin/node /opt/proof-vrf/current/vrf/operator/archiver.mjs --manifest /etc/proof-vrf/deployment.json --state /var/lib/proof-vrf/archiver-state.json --health-file /var/lib/proof-vrf/archiver-health.json --archive-after-blocks 32 --poll-ms 1000 --maximum-total-fee-wei 10000000000000 --maximum-gas-price-wei 15000000
+Restart=on-failure
+RestartSec=2s
+StateDirectory=proof-vrf
+StateDirectoryMode=0700
+UMask=0077
+NoNewPrivileges=true
+PrivateDevices=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+ReadOnlyPaths=/opt/proof-vrf /etc/proof-vrf/deployment.json
+ReadWritePaths=/var/lib/proof-vrf
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+CapabilityBoundingSet=
+AmbientCapabilities=
+
+[Install]
+WantedBy=multi-user.target

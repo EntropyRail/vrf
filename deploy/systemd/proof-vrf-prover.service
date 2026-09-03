@@ -1,0 +1,46 @@
+[Unit]
+Description=Robinhood proof VRF isolated ECVRF prover
+After=network-online.target wg-quick@wg0.service
+Wants=network-online.target
+Requires=wg-quick@wg0.service
+
+[Service]
+Type=simple
+User=proof-vrf
+Group=proof-vrf
+WorkingDirectory=/opt/proof-vrf/current
+EnvironmentFile=/etc/proof-vrf/prover.conf
+LoadCredential=proof-key-password:/etc/proof-vrf/credentials/proof-key-password
+LoadCredential=bearer-token:/etc/proof-vrf/credentials/prover-bearer-token
+LoadCredential=rpc-urls:/etc/proof-vrf/credentials/rpc-urls
+ExecStart=/usr/bin/env VRF_KEY_PASSWORD_FILE=${CREDENTIALS_DIRECTORY}/proof-key-password VRF_PROVER_BEARER_TOKEN_FILE=${CREDENTIALS_DIRECTORY}/bearer-token VRF_RPC_URLS_FILE=${CREDENTIALS_DIRECTORY}/rpc-urls /usr/bin/node /opt/proof-vrf/current/vrf/operator/prover-server.mjs --keystore /var/lib/proof-vrf/proof-key.json --coordinator ${VRF_COORDINATOR} --chain-id ${VRF_CHAIN_ID} --host ${VRF_PROVER_HOST} --port ${VRF_PROVER_PORT} --tls-key /etc/proof-vrf/tls/prover-server.key --tls-cert /etc/proof-vrf/tls/prover-server.crt --tls-ca /etc/proof-vrf/tls/prover-ca.crt
+Restart=on-failure
+RestartSec=5s
+TimeoutStopSec=30s
+StateDirectory=proof-vrf
+StateDirectoryMode=0700
+UMask=0077
+NoNewPrivileges=true
+PrivateDevices=true
+PrivateTmp=true
+ProtectClock=true
+ProtectControlGroups=true
+ProtectHome=true
+ProtectKernelLogs=true
+ProtectKernelModules=true
+ProtectKernelTunables=true
+ProtectSystem=strict
+ReadOnlyPaths=/opt/proof-vrf /etc/proof-vrf
+ReadWritePaths=/var/lib/proof-vrf
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+RestrictNamespaces=true
+RestrictRealtime=true
+RestrictSUIDSGID=true
+LockPersonality=true
+CapabilityBoundingSet=
+AmbientCapabilities=
+SystemCallArchitectures=native
+LimitNOFILE=4096
+
+[Install]
+WantedBy=multi-user.target

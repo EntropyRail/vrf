@@ -1,0 +1,83 @@
+{
+  "format": "entropyrail-public-deployment/v1",
+  "scope": "Recorded testnet evidence; not a runtime operator manifest or live health claim",
+  "chainId": 46630,
+  "status": "deployed",
+  "originalDeploymentCommit": "35ba2cf0641487f45eb999a68879d439a25239bb",
+  "keyHash": "0x1fbf5fb54b3dfa52ca12a50f8da5f7fcb546d8ce367d4fc21f3a3c85e81df744",
+  "contracts": {
+    "safe": {
+      "address": "0x1071abAE78f87E419358AAC2699F99c640aA4362",
+      "blockNumber": 111883357,
+      "runtimeCodeHash": "0xd7d408ebcd99b2b70be43e20253d6d92a8ea8fab29bd3be7f55b10032331fb4c",
+      "transactionHash": "0xe6228a490e39aade859c925f5733ba92a10dca63f51c5ac97c6843ffbe5484e4"
+    },
+    "timelock": {
+      "address": "0x32Bd74DF2D3d6BCe6D42d02B58A0d3F3F1FB1C61",
+      "blockNumber": 111883404,
+      "runtimeCodeHash": "0x87da864d2d843afa009bb9ab3d27ff44bb42be97bb7ad5ab09bfe76a8b776608",
+      "transactionHash": "0x38623ab7d0fc3d9da745a927751b2ef2abde0043570cddd62b46a69cb4458b7e"
+    },
+    "blockContext": {
+      "address": "0x9336C31214e02BD1eb390b5d2B44889773dF29f8",
+      "blockNumber": 111883435,
+      "runtimeCodeHash": "0x16fa949af6839f4a38fed9bfa18cf459e99345e357a7509968a16371378ee291",
+      "transactionHash": "0x664c7cd1c74fce8af8e96aab7806f03eb572af9c0b9fc01d8a431cd466b24c74"
+    },
+    "blockhashStore": {
+      "address": "0x14eC9999a1FfdAEdE2Ae96C718d26cbaf9eF2288",
+      "blockNumber": 111883453,
+      "runtimeCodeHash": "0x5676ed0bff84b24557c4c9330c23e0b254a53a2ba577e4f029586f84ef8821b5",
+      "transactionHash": "0x87fa6df67ed6001a5b62ee81bdfac6633cd51890d36b4f421e1691120881ca1a"
+    },
+    "l1FeeCalculator": {
+      "address": "0xB6d47D6f931EA0579C3F1C49FAb5106a2161C88F",
+      "blockNumber": 111883477,
+      "runtimeCodeHash": "0x6be10d498bbe8a931080201eb8614452574cd794d2c620732a20da23bad90a1a",
+      "transactionHash": "0xba474ee66cef6a9e09eafbbcbcd9c80e6cacf9fda0f73bc2d0a7aa7f5ef08481"
+    },
+    "verifier": {
+      "address": "0x0B2B48e69F099D6482Dce0d6F3510D12b93eE410",
+      "blockNumber": 111883505,
+      "runtimeCodeHash": "0xca0b415c82ec2f543b195922baf7967a465d1a111ffb3a2e9d7da35bbc1d3122",
+      "transactionHash": "0xdbdc0525772f57e54f7ece2c75d33e4ed337130d6895971201208de44861094a"
+    },
+    "coordinator": {
+      "address": "0xA44D9b1058Baa07e053eB3B717dBb878E51B5f31",
+      "blockNumber": 111883547,
+      "runtimeCodeHash": "0xb895db32c4cee454528760165ab594cb5272868ddd5583f8446311ce316e683d",
+      "transactionHash": "0xcaa84b5e89468fe6d9db7ad564c83d101cb47a6283d731ebbbd718d1fe395493"
+    },
+    "blsBackend": {
+      "address": "0x7848c39EBDC0d8D99AD10955a6f4B165B1e09B97",
+      "blockNumber": 111883571,
+      "runtimeCodeHash": "0x38ef6b935d72f081179416d9752494f14eb9ee5896dbed525d78e4908d4b3394",
+      "transactionHash": "0xb09e0fffbc3c530a8ae28b549efb78e7d25d07e6796e5b70002d2c48daebc696"
+    },
+    "thresholdVerifier": {
+      "address": "0x81262d9EA3a1bec811374e0FEa1D905d5Ef61ce8",
+      "blockNumber": 111883600,
+      "runtimeCodeHash": "0x93e362bb7c7193086458cf6e3af17d3e48b1ab4708a3b138908e2c849e40c2ec",
+      "transactionHash": "0xd68a631944cc3ab861aa0b6cc8c12d63ae7c3322a205692b9f995faede35fdd0"
+    }
+  },
+  "sourceVerification": {
+    "status": "verified",
+    "links": {
+      "safe": "https://explorer.testnet.chain.robinhood.com/address/0x1071abAE78f87E419358AAC2699F99c640aA4362?tab=contract",
+      "timelock": "https://explorer.testnet.chain.robinhood.com/address/0x32Bd74DF2D3d6BCe6D42d02B58A0d3F3F1FB1C61?tab=contract",
+      "blockContext": "https://explorer.testnet.chain.robinhood.com/address/0x9336C31214e02BD1eb390b5d2B44889773dF29f8?tab=contract",
+      "blockhashStore": "https://explorer.testnet.chain.robinhood.com/address/0x14eC9999a1FfdAEdE2Ae96C718d26cbaf9eF2288?tab=contract",
+      "l1FeeCalculator": "https://explorer.testnet.chain.robinhood.com/address/0xB6d47D6f931EA0579C3F1C49FAb5106a2161C88F?tab=contract",
+      "verifier": "https://explorer.testnet.chain.robinhood.com/address/0x0B2B48e69F099D6482Dce0d6F3510D12b93eE410?tab=contract",
+      "coordinator": "https://explorer.testnet.chain.robinhood.com/address/0xA44D9b1058Baa07e053eB3B717dBb878E51B5f31?tab=contract",
+      "blsBackend": "https://explorer.testnet.chain.robinhood.com/address/0x7848c39EBDC0d8D99AD10955a6f4B165B1e09B97?tab=contract",
+      "thresholdVerifier": "https://explorer.testnet.chain.robinhood.com/address/0x81262d9EA3a1bec811374e0FEa1D905d5Ef61ce8?tab=contract"
+    }
+  },
+  "canary": {
+    "status": "pass",
+    "requestTransaction": "0x9aabbf0b74fee53362575700332b80e3d3b79e22ee053642982900d5fb9712cc",
+    "fulfillmentTransaction": "0x4b567876e5c0d7cd08f6403f37f88f195488836e48f927c4f4d1f520ff2e3678"
+  }
+}

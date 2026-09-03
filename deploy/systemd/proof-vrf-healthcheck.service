@@ -1,0 +1,23 @@
+[Unit]
+Description=Validate proof VRF operator health record
+
+[Service]
+Type=oneshot
+User=proof-vrf
+Group=proof-vrf
+WorkingDirectory=/opt/proof-vrf/current
+ExecStart=/usr/bin/node /opt/proof-vrf/current/vrf/operator/healthcheck.mjs --file /var/lib/proof-vrf/health.json --maximum-age-seconds 30
+NoNewPrivileges=true
+PrivateDevices=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+ReadOnlyPaths=/opt/proof-vrf /var/lib/proof-vrf
+RestrictAddressFamilies=AF_UNIX
+RestrictNamespaces=true
+RestrictRealtime=true
+RestrictSUIDSGID=true
+LockPersonality=true
+CapabilityBoundingSet=
+AmbientCapabilities=
+SystemCallArchitectures=native

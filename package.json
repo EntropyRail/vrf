@@ -1,0 +1,65 @@
+{
+  "name": "@entropyrail/vrf",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Proof-verified randomness coordinator and operator for Robinhood Chain",
+  "license": "MIT",
+  "homepage": "https://entropyrail.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EntropyRail/vrf.git"
+  },
+  "bugs": {
+    "url": "https://github.com/EntropyRail/vrf/issues"
+  },
+  "engines": {
+    "node": ">=22.13 <25"
+  },
+  "scripts": {
+    "compile": "hardhat --config hardhat.config.js compile",
+    "test": "hardhat --config hardhat.config.js test",
+    "test:coverage": "hardhat --config hardhat.config.js test --coverage",
+    "test:robinhood-fork": "VRF_RUN_ROBINHOOD_FORK=true hardhat --config hardhat.config.js test --network robinhoodFork test/RobinhoodFork.test.cjs",
+    "deploy:local": "hardhat --config hardhat.config.js run scripts/deploy.cjs --network hardhat",
+    "deploy:testnet": "hardhat --config hardhat.config.js run scripts/deploy.cjs --network robinhoodTestnet",
+    "deploy:mainnet": "hardhat --config hardhat.config.js run scripts/deploy.cjs --network robinhoodMainnet",
+    "deploy:service:local": "hardhat --config hardhat.config.js run scripts/deploy-service-v2.cjs --network hardhat",
+    "deploy:service:testnet": "hardhat --config hardhat.config.js run scripts/deploy-service-v2.cjs --network robinhoodTestnet",
+    "deploy:service:mainnet": "hardhat --config hardhat.config.js run scripts/deploy-service-v2.cjs --network robinhoodMainnet",
+    "deploy:timelock:local": "hardhat --config hardhat.config.js run scripts/deploy-timelock.cjs --network hardhat",
+    "deploy:timelock:testnet": "hardhat --config hardhat.config.js run scripts/deploy-timelock.cjs --network robinhoodTestnet",
+    "deploy:timelock:mainnet": "hardhat --config hardhat.config.js run scripts/deploy-timelock.cjs --network robinhoodMainnet",
+    "deploy:threshold-verifier:local": "hardhat --config hardhat.config.js run scripts/deploy-threshold-verifier.cjs --network hardhat",
+    "deploy:threshold-verifier:testnet": "hardhat --config hardhat.config.js run scripts/deploy-threshold-verifier.cjs --network robinhoodTestnet",
+    "deploy:threshold-verifier:mainnet": "hardhat --config hardhat.config.js run scripts/deploy-threshold-verifier.cjs --network robinhoodMainnet",
+    "operator": "node operator/cli.mjs",
+    "prover:serve": "node operator/prover-server.mjs",
+    "operator:readiness": "node operator/readiness.mjs",
+    "operator:healthcheck": "node operator/healthcheck.mjs",
+    "deployment:verify": "node operator/verify-deployment.mjs",
+    "threshold:deployment:verify": "node operator/verify-threshold-deployment.mjs",
+    "canary:start:testnet": "hardhat --config hardhat.config.js run scripts/start-testnet-canary.cjs --network robinhoodTestnet",
+    "calibrate": "node operator/calibrate.mjs",
+    "probe:precompiles": "node operator/precompile-probe.mjs",
+    "soak:report": "node operator/soak-report.mjs",
+    "smoke:report": "node operator/smoke-report.mjs",
+    "threshold:group": "node operator/threshold-group.mjs",
+    "threshold:dkg": "node operator/threshold-dkg.mjs",
+    "threshold:node": "node operator/threshold-node.mjs",
+    "threshold:prepare-register": "node scripts/prepare-register-threshold.mjs"
+  },
+  "dependencies": {
+    "@noble/curves": "1.9.1",
+    "@openzeppelin/contracts": "5.6.1",
+    "ethers": "6.17.0",
+    "pg": "8.23.0"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-ethers": "4.0.15",
+    "@nomicfoundation/hardhat-ethers-chai-matchers": "3.0.11",
+    "@nomicfoundation/hardhat-node-test-runner": "3.1.0",
+    "chai": "6.2.0",
+    "hardhat": "3.15.0"
+  }
+}

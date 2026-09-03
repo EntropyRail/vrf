@@ -1,0 +1,46 @@
+[Unit]
+Description=Isolated Robinhood testnet V3 operator
+After=network-online.target wg-quick@wg0.service
+Requires=wg-quick@wg0.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=proof-vrf
+Group=proof-vrf
+WorkingDirectory=/opt/proof-vrf-v3/current
+LoadCredential=tx-private-key:/etc/proof-vrf-v3/credentials/tx-private-key
+LoadCredential=database-url:/etc/proof-vrf/credentials/database-url
+LoadCredential=rpc-urls:/etc/proof-vrf/credentials/rpc-urls
+LoadCredential=prover-bearer-token:/etc/proof-vrf/credentials/prover-bearer-token
+ExecStart=/usr/bin/env VRF_TX_PRIVATE_KEY_FILE=${CREDENTIALS_DIRECTORY}/tx-private-key VRF_DATABASE_URL_FILE=${CREDENTIALS_DIRECTORY}/database-url VRF_RPC_URLS_FILE=${CREDENTIALS_DIRECTORY}/rpc-urls VRF_PROVER_BEARER_TOKEN_FILE=${CREDENTIALS_DIRECTORY}/prover-bearer-token /usr/bin/node /opt/proof-vrf-v3/current/operator/run-compact.mjs --mode operator --manifest /etc/proof-vrf-v3/manifest.json --state /var/lib/proof-vrf-v3/operator-budget.json --health-file /var/lib/proof-vrf-v3/operator-health.json --maximum-total-fee-wei 50000000000000 --prover-url https://10.200.0.12:9445 --prover-client-key /etc/proof-vrf/tls/prover-client.key --prover-client-cert /etc/proof-vrf/tls/prover-client.crt --prover-ca /etc/proof-vrf/tls/prover-ca.crt
+Restart=on-failure
+RestartSec=5s
+TimeoutStopSec=30s
+StateDirectory=proof-vrf-v3
+StateDirectoryMode=0700
+UMask=0077
+NoNewPrivileges=true
+PrivateDevices=true
+PrivateTmp=true
+ProtectClock=true
+ProtectControlGroups=true
+ProtectHome=true
+ProtectKernelLogs=true
+ProtectKernelModules=true
+ProtectKernelTunables=true
+ProtectSystem=strict
+ReadOnlyPaths=/opt/proof-vrf-v3 /etc/proof-vrf /etc/proof-vrf-v3
+ReadWritePaths=/var/lib/proof-vrf-v3
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+RestrictNamespaces=true
+RestrictRealtime=true
+RestrictSUIDSGID=true
+LockPersonality=true
+CapabilityBoundingSet=
+AmbientCapabilities=
+SystemCallArchitectures=native
+LimitNOFILE=4096
+
+[Install]
+WantedBy=multi-user.target

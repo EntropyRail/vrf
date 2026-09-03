@@ -1,0 +1,48 @@
+[Unit]
+Description=Robinhood proof VRF threshold signing node
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=proof-vrf
+Group=proof-vrf
+WorkingDirectory=/opt/proof-vrf/current
+EnvironmentFile=/etc/proof-vrf/threshold-node.conf
+LoadCredential=share-password:/etc/proof-vrf/credentials/threshold-share-password
+LoadCredential=node-token:/etc/proof-vrf/credentials/threshold-node-token
+LoadCredential=tls-key:/etc/proof-vrf/credentials/threshold-tls-key
+LoadCredential=tls-cert:/etc/proof-vrf/credentials/threshold-tls-cert
+LoadCredential=tls-ca:/etc/proof-vrf/credentials/threshold-tls-ca
+LoadCredential=rpc-urls:/etc/proof-vrf/credentials/rpc-urls
+ExecStart=/usr/bin/env VRF_THRESHOLD_KEY_PASSWORD_FILE=${CREDENTIALS_DIRECTORY}/share-password VRF_THRESHOLD_NODE_TOKEN_FILE=${CREDENTIALS_DIRECTORY}/node-token VRF_RPC_URLS_FILE=${CREDENTIALS_DIRECTORY}/rpc-urls /usr/bin/node /opt/proof-vrf/current/vrf/operator/threshold-node.mjs --manifest ${VRF_THRESHOLD_MANIFEST} --keystore ${VRF_THRESHOLD_KEYSTORE} --coordinator ${VRF_COORDINATOR} --state ${VRF_THRESHOLD_STATE} --audit-log ${VRF_THRESHOLD_AUDIT_LOG} --host ${VRF_THRESHOLD_HOST} --port ${VRF_THRESHOLD_PORT} --tls-key ${CREDENTIALS_DIRECTORY}/tls-key --tls-cert ${CREDENTIALS_DIRECTORY}/tls-cert --tls-ca ${CREDENTIALS_DIRECTORY}/tls-ca
+Restart=on-failure
+RestartSec=5s
+TimeoutStopSec=30s
+StateDirectory=proof-vrf
+StateDirectoryMode=0700
+UMask=0077
+NoNewPrivileges=true
+PrivateDevices=true
+PrivateTmp=true
+ProtectClock=true
+ProtectControlGroups=true
+ProtectHome=true
+ProtectKernelLogs=true
+ProtectKernelModules=true
+ProtectKernelTunables=true
+ProtectSystem=strict
+ReadOnlyPaths=/opt/proof-vrf /etc/proof-vrf
+ReadWritePaths=/var/lib/proof-vrf
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+RestrictNamespaces=true
+RestrictRealtime=true
+RestrictSUIDSGID=true
+LockPersonality=true
+CapabilityBoundingSet=
+AmbientCapabilities=
+SystemCallArchitectures=native
+LimitNOFILE=4096
+
+[Install]
+WantedBy=multi-user.target

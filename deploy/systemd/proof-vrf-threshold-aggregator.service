@@ -1,0 +1,50 @@
+[Unit]
+Description=Robinhood proof VRF threshold aggregator and relayer
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=proof-vrf
+Group=proof-vrf
+WorkingDirectory=/opt/proof-vrf/current
+EnvironmentFile=/etc/proof-vrf/threshold-aggregator.conf
+LoadCredential=tx-private-key:/etc/proof-vrf/credentials/tx-private-key
+LoadCredential=database-url:/etc/proof-vrf/credentials/database-url
+LoadCredential=node-token:/etc/proof-vrf/credentials/threshold-node-token
+LoadCredential=client-key:/etc/proof-vrf/credentials/threshold-client-key
+LoadCredential=client-cert:/etc/proof-vrf/credentials/threshold-client-cert
+LoadCredential=tls-ca:/etc/proof-vrf/credentials/threshold-tls-ca
+LoadCredential=rpc-urls:/etc/proof-vrf/credentials/rpc-urls
+ExecStartPre=/usr/bin/env VRF_TX_PRIVATE_KEY_FILE=${CREDENTIALS_DIRECTORY}/tx-private-key VRF_DATABASE_URL_FILE=${CREDENTIALS_DIRECTORY}/database-url VRF_THRESHOLD_NODE_TOKEN_FILE=${CREDENTIALS_DIRECTORY}/node-token VRF_RPC_URLS_FILE=${CREDENTIALS_DIRECTORY}/rpc-urls /usr/bin/node /opt/proof-vrf/current/vrf/operator/readiness.mjs --coordinator ${VRF_COORDINATOR} --from-block ${VRF_FROM_BLOCK} --threshold-manifest ${VRF_THRESHOLD_MANIFEST} --threshold-client-key ${CREDENTIALS_DIRECTORY}/client-key --threshold-client-cert ${CREDENTIALS_DIRECTORY}/client-cert --threshold-ca ${CREDENTIALS_DIRECTORY}/tls-ca --expected-chain-id 46630 --minimum-rpc-count 2
+ExecStart=/usr/bin/env VRF_TX_PRIVATE_KEY_FILE=${CREDENTIALS_DIRECTORY}/tx-private-key VRF_DATABASE_URL_FILE=${CREDENTIALS_DIRECTORY}/database-url VRF_THRESHOLD_NODE_TOKEN_FILE=${CREDENTIALS_DIRECTORY}/node-token VRF_RPC_URLS_FILE=${CREDENTIALS_DIRECTORY}/rpc-urls /usr/bin/node /opt/proof-vrf/current/vrf/operator/cli.mjs run-v2 --threshold-manifest ${VRF_THRESHOLD_MANIFEST} --threshold-client-key ${CREDENTIALS_DIRECTORY}/client-key --threshold-client-cert ${CREDENTIALS_DIRECTORY}/client-cert --threshold-ca ${CREDENTIALS_DIRECTORY}/tls-ca --coordinator ${VRF_COORDINATOR} --from-block ${VRF_FROM_BLOCK} --health-file /var/lib/proof-vrf/health.json --event-confirmations 2 --reorg-lookback 32 --archive-after-blocks 128 --replacement-ms 45000 --replacement-attempts 3 --scan-lease-seconds 60 --request-lease-seconds 360 --work-limit 25
+Restart=on-failure
+RestartSec=5s
+TimeoutStopSec=30s
+StateDirectory=proof-vrf
+StateDirectoryMode=0700
+UMask=0077
+NoNewPrivileges=true
+PrivateDevices=true
+PrivateTmp=true
+ProtectClock=true
+ProtectControlGroups=true
+ProtectHome=true
+ProtectKernelLogs=true
+ProtectKernelModules=true
+ProtectKernelTunables=true
+ProtectSystem=strict
+ReadOnlyPaths=/opt/proof-vrf /etc/proof-vrf
+ReadWritePaths=/var/lib/proof-vrf
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+RestrictNamespaces=true
+RestrictRealtime=true
+RestrictSUIDSGID=true
+LockPersonality=true
+CapabilityBoundingSet=
+AmbientCapabilities=
+SystemCallArchitectures=native
+LimitNOFILE=4096
+
+[Install]
+WantedBy=multi-user.target

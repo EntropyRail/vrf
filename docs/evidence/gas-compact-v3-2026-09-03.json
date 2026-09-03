@@ -1,0 +1,96 @@
+{
+  "format": "proof-vrf-compact-local-gas-v1",
+  "sourceSha256": "d7fe98371a879be14ebc107308cdaa8e23bc72e17543d02ac9105c7ee2d76a30",
+  "baseSourceSha256": "86913b6f5326d71e60ef2eaa74414a554b56b1f37d6cca629f98ea0598e478c5",
+  "runtimeCodeBytes": 21497,
+  "coordinatorAbiSha256": "1d12e207e2615039b7733dff5762a1077de4602df0aec18dfef72014c1a9aa7c",
+  "environment": "solc 0.8.24, viaIR, optimizer runs 500, Hardhat local, fixed mock L2 hash, zero L1 fee",
+  "coordinatorDeploymentGas": 5224097,
+  "lifecycle": {
+    "getRequestGas": 36250,
+    "expireGas": 67578,
+    "pruneGas": 42807,
+    "setPricingGas": 84669,
+    "setKeyServiceGas": 162963
+  },
+  "rows": [
+    {
+      "name": "public-1-word-cold",
+      "requestId": "75209733175279858059343413841101308666984065213080617460066486554835221035789",
+      "proofHash": "0x28315dbf6bc92f6f3395fc36e920f6c1beb687afab48395b7e6fa6ae3ae7d931",
+      "fulfillmentCalldataBytes": 1348,
+      "requestGas": 176113,
+      "fulfillmentGas": 227475,
+      "totalGas": 403588,
+      "billedGas": 281428,
+      "customerCostWei": "513826600000000"
+    },
+    {
+      "name": "public-1-word-steady",
+      "requestId": "89086112940153371093558262022024350249034526815668241555190895481656177421534",
+      "proofHash": "0x6428366f76a9f7ea7c6ce5956f0d12aaa7016051bc86117e0882dcd8154249d9",
+      "fulfillmentCalldataBytes": 1348,
+      "requestGas": 141913,
+      "fulfillmentGas": 151235,
+      "totalGas": 293148,
+      "billedGas": 242188,
+      "customerCostWei": "432538600000000"
+    },
+    {
+      "name": "public-3-words",
+      "requestId": "21021767669912838082867944099498902269830808676676141597615673511636168194842",
+      "proofHash": "0xab5dbf49af3b33277dc48f329927f930e86cd1ea56e86feda6995bd86a2bd8fb",
+      "fulfillmentCalldataBytes": 1348,
+      "requestGas": 141913,
+      "fulfillmentGas": 215454,
+      "totalGas": 357367,
+      "billedGas": 306419,
+      "customerCostWei": "509615800000000"
+    },
+    {
+      "name": "public-32-words",
+      "requestId": "101550260692398897897989643384529819396130063487765584479046651647197501703667",
+      "proofHash": "0x8b0d9d2d31391a7d676bea8795717069589ea80bd582d069c8de40f00eaf9876",
+      "fulfillmentCalldataBytes": 1348,
+      "requestGas": 141925,
+      "fulfillmentGas": 833082,
+      "totalGas": 975007,
+      "billedGas": 924059,
+      "customerCostWei": "1250795800000000"
+    },
+    {
+      "name": "sponsored-1-word-cold",
+      "requestId": "75209733175279858059343413841101308666984065213080617460066486554835221035789",
+      "proofHash": "0x28315dbf6bc92f6f3395fc36e920f6c1beb687afab48395b7e6fa6ae3ae7d931",
+      "fulfillmentCalldataBytes": 1348,
+      "requestGas": 184372,
+      "fulfillmentGas": 212834,
+      "totalGas": 397206,
+      "billedGas": 281428,
+      "customerCostWei": "465800000000000"
+    },
+    {
+      "name": "sponsored-1-word-steady",
+      "requestId": "89086112940153371093558262022024350249034526815668241555190895481656177421534",
+      "proofHash": "0x6428366f76a9f7ea7c6ce5956f0d12aaa7016051bc86117e0882dcd8154249d9",
+      "fulfillmentCalldataBytes": 1348,
+      "requestGas": 150172,
+      "fulfillmentGas": 153694,
+      "totalGas": 303866,
+      "billedGas": 242188,
+      "customerCostWei": "392360000000000"
+    },
+    {
+      "name": "failed-callback-and-retry",
+      "requestId": "75209733175279858059343413841101308666984065213080617460066486554835221035789",
+      "proofHash": "0x28315dbf6bc92f6f3395fc36e920f6c1beb687afab48395b7e6fa6ae3ae7d931",
+      "fulfillmentCalldataBytes": 1348,
+      "requestGas": 176113,
+      "fulfillmentGas": 181562,
+      "totalGas": 357675,
+      "billedGas": 235515,
+      "customerCostWei": "458731000000000",
+      "retryGas": 106874
+    }
+  ]
+}

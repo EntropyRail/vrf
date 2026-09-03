@@ -1,0 +1,46 @@
+[Unit]
+Description=Isolated Robinhood testnet V3 prover
+After=network-online.target wg-quick@wg0.service
+Requires=wg-quick@wg0.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=proof-vrf
+Group=proof-vrf
+WorkingDirectory=/opt/proof-vrf-v3/current
+EnvironmentFile=/etc/proof-vrf-v3/prover.conf
+LoadCredential=proof-key-password:/etc/proof-vrf/credentials/proof-key-password
+LoadCredential=bearer-token:/etc/proof-vrf/credentials/prover-bearer-token
+LoadCredential=rpc-urls:/etc/proof-vrf/credentials/rpc-urls
+ExecStart=/usr/bin/env VRF_KEY_PASSWORD_FILE=${CREDENTIALS_DIRECTORY}/proof-key-password VRF_PROVER_BEARER_TOKEN_FILE=${CREDENTIALS_DIRECTORY}/bearer-token VRF_RPC_URLS_FILE=${CREDENTIALS_DIRECTORY}/rpc-urls /usr/bin/node /opt/proof-vrf-v3/current/operator/prover-server.mjs --keystore /var/lib/proof-vrf/proof-key.json --coordinator ${VRF_COORDINATOR} --chain-id 46630 --host 10.200.0.12 --port 9445 --tls-key /etc/proof-vrf/tls/prover-server.key --tls-cert /etc/proof-vrf/tls/prover-server.crt --tls-ca /etc/proof-vrf/tls/prover-ca.crt
+Restart=on-failure
+RestartSec=5s
+TimeoutStopSec=30s
+StateDirectory=proof-vrf-v3
+StateDirectoryMode=0700
+UMask=0077
+NoNewPrivileges=true
+PrivateDevices=true
+PrivateTmp=true
+ProtectClock=true
+ProtectControlGroups=true
+ProtectHome=true
+ProtectKernelLogs=true
+ProtectKernelModules=true
+ProtectKernelTunables=true
+ProtectSystem=strict
+ReadOnlyPaths=/opt/proof-vrf-v3 /etc/proof-vrf /etc/proof-vrf-v3
+ReadWritePaths=/var/lib/proof-vrf-v3
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+RestrictNamespaces=true
+RestrictRealtime=true
+RestrictSUIDSGID=true
+LockPersonality=true
+CapabilityBoundingSet=
+AmbientCapabilities=
+SystemCallArchitectures=native
+LimitNOFILE=4096
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,6 @@
+# Public, non-secret service configuration. Install as /etc/proof-vrf/operator.conf.
+# VRF_RPC_URLS is a root-only systemd credential because provider URLs commonly contain tokens.
+VRF_COORDINATOR=0x0000000000000000000000000000000000000000
+VRF_FROM_BLOCK=0
+VRF_PROVER_URL=https://vrf-prover-a:9444
+VRF_PROOF_KEY_HASH=0x0000000000000000000000000000000000000000000000000000000000000000
